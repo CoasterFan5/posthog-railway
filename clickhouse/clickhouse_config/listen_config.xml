@@ -1,0 +1,4 @@
+<clickhouse>
+    <listen_host>::</listen_host>
+    <tcp_port>9000</tcp_port>
+</clickhouse>
