@@ -1,0 +1,37 @@
+http://localhost:8000 {
+                    @replay-capture {
+                        path /s
+                        path /s/*
+                    }
+
+                    @capture {
+                        path /e
+                        path /e/*
+                        path /i/v0/*
+                        path /batch
+                        path /batch*
+                        path /capture
+                        path /capture*
+                    }
+
+                    @flags {
+                        path /flags
+                        path /flags*
+                    }
+
+                    handle @capture {
+                        reverse_proxy capture:3000
+                    }
+
+                    handle @replay-capture {
+                        reverse_proxy replay-capture:3000
+                    }
+
+                    handle @flags {
+                        reverse_proxy feature-flags:3001
+                    }
+
+                    handle {
+                        reverse_proxy web:8000
+                    }
+                }
