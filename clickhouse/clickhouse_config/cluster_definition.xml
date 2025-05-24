@@ -4,7 +4,7 @@
             <shard>
                 <internal_replication>true</internal_replication>
                 <replica>
-                    <host>::</host>
+                    <host>127.0.0.1</host>
                     <port>9000</port> </replica>
             </shard>
         </posthog_migrations>
@@ -12,7 +12,7 @@
             <shard>
                 <internal_replication>true</internal_replication>
                 <replica>
-                    <host>::</host>
+                    <host>127.0.0.1</host>
                     <port>9000</port>
                 </replica>
             </shard>
