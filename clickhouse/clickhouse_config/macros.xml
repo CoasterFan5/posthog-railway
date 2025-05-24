@@ -1,13 +1,7 @@
 <clickhouse>
     <macros>
-        <cluster>
-            posthog_migrations
-        </cluster>
-        <shard>
-            01
-        </shard>
-        <replica>
-            replica1
-        </replica>
+        <cluster>posthog_migrations</cluster>
+        <shard>01</shard>
+        <replica>replica1</replica>
     </macros>
 </clickhouse>
