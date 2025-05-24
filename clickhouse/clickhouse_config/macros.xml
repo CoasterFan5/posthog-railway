@@ -3,5 +3,6 @@
         <cluster>posthog_migrations</cluster>
         <shard>01</shard>
         <replica>replica1</replica>
+        <hostClusterType>default</hostClusterType>
     </macros>
 </clickhouse>
