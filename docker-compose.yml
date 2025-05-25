@@ -1,0 +1,51 @@
+# Yay
+services:
+  pg:
+    image: ghcr.io/railwayapp-templates/postgres-ssl:16
+    restart: always
+    env_file: ./.env.test
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: bitnami/redis:7.2.5
+    restart: always
+    env_file: ./.env.test
+    ports:
+      - "6379:6379"
+
+  clickhouse:
+    image: ghcr.io/coasterfan5/posthog-railway-clickhouse:main
+    env_file: ./.env.test
+    ports:
+      - "9000:9000"
+
+  zookeeper:
+    image: zookeeper:3.7.0
+    env_file: ./.env.test
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: ghcr.io/posthog/kafka-container:v2.8.2
+    env_file: ./.env.test
+    ports:
+      - "9092:9092"
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    env_file: ./.env.test
+    ports:
+      - "8080:8080"
+    environment:
+      - KAFKA_BROKER_ID="1001"
+
+  posthog:
+    image: "posthog/posthog"
+    env_file: ./.env.test
+
+  caddy:
+    image: ghcr.io/coasterfan5/posthog-railway-caddy:main
+    env_file: ./.env.test
+    ports:
+      - "9999:8000"
