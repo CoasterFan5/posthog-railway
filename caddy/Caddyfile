@@ -1,4 +1,4 @@
-:8000 {
+{$DOMAIN:localhost} {
                     @replay-capture {
                         path /s
                         path /s/*
