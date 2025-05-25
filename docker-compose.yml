@@ -25,12 +25,24 @@ services:
     env_file: ./.env.test
     ports:
       - "2181:2181"
+    volumes:
+      - zookeeper-datalog:/datalog
+      - zookeeper-data:/data
+      - zookeeper-logs:/logs
 
   kafka:
     image: ghcr.io/posthog/kafka-container:v2.8.2
     env_file: ./.env.test
-    ports:
-      - "9092:9092"
+    restart: on-failure
+    depends_on:
+      - zookeeper
+    volumes:
+      - kafka-data:/bitnami/kafka
+    healthcheck:
+      test: kafka-cluster.sh cluster-id --bootstrap-server localhost:9092 || exit 1
+      interval: 3s
+      timeout: 10s
+      retries: 10
 
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
@@ -38,10 +50,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - KAFKA_BROKER_ID="1001"
+      KAFKA_BROKER_ID: 1001
 
-  posthog:
-    image: "posthog/posthog"
+  web:
+    image: "ghcr.io/posthog/posthog:86d6812c7de75c6c869b935e17baf45bf295bfd5"
     env_file: ./.env.test
 
   caddy:
@@ -49,3 +61,16 @@ services:
     env_file: ./.env.test
     ports:
       - "9999:8000"
+
+volumes:
+  zookeeper-data:
+  zookeeper-datalog:
+  zookeeper-logs:
+  objectstorage:
+  postgres-data:
+  clickhouse-data:
+  caddy-data:
+  caddy-config:
+  redis-data:
+  redis7-data:
+  kafka-data:

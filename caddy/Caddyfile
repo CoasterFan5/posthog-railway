@@ -1,4 +1,4 @@
-http://localhost:8000 {
+:8000 {
                     @replay-capture {
                         path /s
                         path /s/*
