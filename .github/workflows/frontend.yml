@@ -1,10 +1,10 @@
-name: Create and publish frontend image
+name: Create and publish custom posthog image
 
 on: [push]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-frontend
+  IMAGE_NAME: ${{ github.repository }}-posthog
 
 jobs:
   build-and-push-image:
@@ -37,7 +37,7 @@ jobs:
         id: push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
-          context: ./frontend
+          context: ./posthog
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
